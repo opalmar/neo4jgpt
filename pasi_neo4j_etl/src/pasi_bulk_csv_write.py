@@ -45,24 +45,18 @@ def load_pasi_graph_from_csv() -> None:
         for node in NODES:
             session.execute_write(_set_uniqueness_constraints, node)
 
-
-
-    LOGGER.info("Loading school nodes")
+    LOGGER.info("Loading schools nodes")
     with driver.session(database="neo4j") as session:
         query = f"""
         LOAD CSV WITH HEADERS
         FROM '{SCHOOLS_CSV_PATH}' AS schools
-        MERGE (s:School {{id: toInteger(schools.school_code),
-                            name: schools.school_name,
-                            district_code: schools.school_district_code,
-                            district_name: schools.school_district_name
-        }})
-            ON CREATE SET s.city = schools.school_city
-            ON MATCH SET s.city = schools.school_city
-            ON CREATE SET s.postal_code = schools.school_postal_code
-            ON MATCH SET s.postal_code = schools.school_postal_code        
+        MERGE (s:School {{id: toInteger(schools.hospital_id),
+                            name: schools.hospital_name,
+                            state_name: schools.hospital_state}});
         """
         _ = session.run(query, {})
+
+
 
     
 
