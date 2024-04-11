@@ -55,7 +55,7 @@ def load_pasi_graph_from_csv() -> None:
         MERGE (s:School {{id: toInteger(schools.SCHOOL_CODE),
                             name: schools.SCHOOL_NAME,
                             district_code: schools.SCHOOL_DISTRICT_CODE,
-                            district_name: schools.SCHOOL_DISTRICT_NAME,
+                            district_name: schools.SCHOOL_DISTRICT_NAME
         }})
             ON CREATE SET s.city = schools.SCHOOL_CITY
             ON MATCH SET s.city = schools.SCHOOL_CITY
