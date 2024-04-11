@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  pasi_neo4j_etl:
+    build:
+      context: ./pasi_neo4j_etl
+    env_file:
+      - .env
